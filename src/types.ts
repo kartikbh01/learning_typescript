@@ -142,15 +142,17 @@ commonly, you define an object's shape by listing its properties and their types
 */
 
 // anonymous(inline) definition where variables are declared
-const user: { name: string; age: number } = {name:"Alice", age:24}
+const user: { name: string; age: number } = { name: "Alice", age: 24 };
 
 // Type alias: A reusable name for a specific shape
-type User = {name: string; age: number}
-const user1:User = {name:"kartik", age:24}
+type User = { name: string; age: number };
+const user1: User = { name: "kartik", age: 24 };
 
 // Interface: similar to type aliases but better for object-oriented designs and extending other shapes
 
 interface User1 {
-    name:String;
-    age:number;
+  name: String;
+  age: number;
 }
+ 
+export {};

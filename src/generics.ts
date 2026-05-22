@@ -31,19 +31,19 @@ const b1 = genericIdentity(123);
 function pair<K, V>(key: K, value: V) {
   return { key, value };
 }
-pair("name", "kartik")
-pair("age", 24)
+pair("name", "kartik");
+pair("age", 24);
 
 // generic types
 type Box<T> = {
-    value: T;
-}
+  value: T;
+};
 const numberBox: Box<number> = {
-    value:10
-}
+  value: 10,
+};
 const stringBox: Box<string> = {
-    value:"hello"
-}
+  value: "hello",
+};
 
 const scores: Array<number> = [];
 const names: Array<string> = [];
@@ -76,3 +76,33 @@ interface Bottle {
 }
 
 identityFour<Bottle>({ brand: "milton", quantity: 2 });
+
+// Generic constraints
+
+function process<T>(value: T) {
+  //return value.toUpperCase();
+  // error: toUpperCase does not exist on type T
+  // because T could be number, boolean, object, or anything
+  // TS refuses unsafe operations
+}
+
+// solution: constraints
+// if you know the generic must be a string
+function process2<T extends string>(value: T) {
+  return value.toUpperCase();
+}
+
+// but what if different types need different logic?
+// string -> uppercase(), number -> square(), array -> length()
+// this is not solved by plain generics
+// you can use unions, narrowing, overloads
+
+function transform<T extends string | number>(value: T) {
+  if (typeof value === "string") {
+    return value.toUpperCase();
+  }
+
+  if (typeof value === "number") {
+    return value * value;
+  }
+}
